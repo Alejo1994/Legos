@@ -1,0 +1,38 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  .App {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+  }
+  
+  .column2 {
+    width: 10%;
+  }
+  
+  .droppable-col {
+    width: 100%;
+    background-color: gray;
+    padding: 10px 10px 0 10px;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .item {
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+  
+  .section {
+    background-color: blue;
+    border: 1px black solid;
+
+  }
+
+  .container-table {
+    width: 60%;
+  }
+
