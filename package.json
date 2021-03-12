@@ -13,6 +13,7 @@
     "react-draggable": "^4.4.3",
     "react-legos": "^0.1.3",
     "react-scripts": "4.0.3",
+    "sweetalert2": "^10.15.5",
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.0"
   },

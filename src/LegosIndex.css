@@ -25,14 +25,46 @@
     margin-bottom: 10px;
     padding: 5px;
   }
-  
-  .section {
-    background-color: blue;
-    border: 1px black solid;
-
-  }
 
   .container-table {
-    width: 60%;
+    width: 35%;
   }
 
+  .col-vertical{
+    width: 45px !important;
+    height: 91px !important;
+    background-color: black;
+    border: 0.5px solid white;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .col-horizontal{
+    height: 45px !important;
+    width: 85px !important;
+    background-color: black;
+    border: 0.5px solid white;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .col{
+    height: 45px !important;
+    width: 85px !important;
+    background-color: black;
+    border: 0.5px solid white;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .col-empty{
+    background-color: white;
+  }
+
+  .col-vertical .item{
+    padding: 0 !important;
+  }
+
+  .col-horizontal .item{
+    padding: 0 !important;
+  }
