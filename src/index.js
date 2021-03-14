@@ -1,10 +1,8 @@
 import React from 'react';
 import reactDom from 'react-dom';
-//import { Brick } from './Lego/Brick';
-//import { Legos } from './Legos';
-import { LegosIndex } from './LegosIndex';
+import { LegosApp } from './LegosApp';
 
 reactDom.render(
-    <LegosIndex />,
+    <LegosApp />,
   document.getElementById('root')
 );

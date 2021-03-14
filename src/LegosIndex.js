@@ -1,7 +1,7 @@
 import './LegosIndex.css'
 import './Lego/brick.css'
 import React, { useEffect, useState } from 'react';
-import { DragDropContext} from 'react-beautiful-dnd';
+import { DragDropContext } from 'react-beautiful-dnd';
 import { v4 } from 'uuid';
 
 import { BrickH } from './Lego/BrickH';
@@ -9,8 +9,11 @@ import { BrickV } from './Lego/BrickV';
 import { DropSection } from './sections/DropSection';
 import { DragSection } from './sections/DragSection';
 import Swal from 'sweetalert2';
+import { useSelector } from 'react-redux';
 
 export const LegosIndex = () => {
+
+  const { activeBrick } = useSelector(state => state.brick);
 
   const colors = [
     {
@@ -106,21 +109,24 @@ export const LegosIndex = () => {
     horizontal3,
     horizontal4 } = state;
 
-    useEffect(() => {
-      
-      if(bricks.items.length === 0){
-        Swal.fire('Felicidades','Lo has logrado','success');
-      }
+  useEffect(() => {
 
-    }, [state])
+    if (bricks.items.length === 0) {
+      Swal.fire('Felicidades', 'Lo has logrado', 'success');
+    }
+
+  }, [state])
 
 
-  const handleDragEnd = (result) => {
-    console.log(result);
-    const { destination, source } =result;
+  const handleDragEnd = ({ destination, source }) => {
     if (!destination) return;
 
     if (destination.index === source.index && destination.droppableId === source.droppableId) {
+      return;
+    }
+
+    if ((destination.droppableId.toString().toLowerCase().includes('vertical') && activeBrick !== 'v')
+      || (destination.droppableId.toString().toLowerCase().includes('horizontal') && activeBrick !== 'h')) {
       return;
     }
 
@@ -146,7 +152,7 @@ export const LegosIndex = () => {
       <DragDropContext onDragEnd={handleDragEnd}>
 
         {/* Legos */}
-        <DragSection bricks={bricks}/>
+        <DragSection bricks={bricks} />
 
         <br />
         <div className="container container-table">
@@ -156,11 +162,13 @@ export const LegosIndex = () => {
               <DropSection object={vertical1} />
 
             </div>
-            <div className="col-3">
+            <div className="col">
               <div className="row">
-                <div className="col-3 col-horizontal">
-                  {/*horizontal1 */}
-                  <DropSection object={horizontal1} />
+                <div className="col">
+                  <div className='col-horizontal'>
+                    {/*horizontal1 */}
+                    <DropSection object={horizontal1} />
+                  </div>
                 </div>
               </div>
             </div>
@@ -171,14 +179,16 @@ export const LegosIndex = () => {
               <DropSection object={vertical2} />
 
             </div>
-            <div className="col-3">
+            <div className="col">
               <div className="row">
-                <div className="col-3 col-horizontal col-empty"></div>
+                <div className="col col-horizontal col-empty"></div>
               </div>
               <div className="row">
-                <div className="col-3 col-horizontal">
-                  {/*horizontal2 */}
-                  <DropSection object={horizontal2} />
+                <div className="col">
+                  <div className='col-horizontal'>
+                    {/*horizontal2 */}
+                    <DropSection object={horizontal2} />
+                  </div>
                 </div>
               </div>
             </div>
@@ -189,21 +199,26 @@ export const LegosIndex = () => {
               <DropSection object={vertical3} />
 
             </div>
-            <div className="col-3 ">
+            <div className="col">
               <div className="row">
-                <div className="col-3 col-horizontal">
-                  {/*horizontal3 */}
-                  <DropSection object={horizontal3} />
+                <div className="col">
+                  <div className='col-horizontal'>
+                    {/*horizontal3 */}
+                    <DropSection object={horizontal3} />
+                  </div>
                 </div>
+
               </div>
             </div>
           </div>
           <div className="row">
-            <div className="col-3">
+            <div className="col">
               <div className="row">
-                <div className="col col-horizontal">
-                  {/*horizontal4 */}
-                  <DropSection object={horizontal4} />
+                <div className="col ">
+                  <div className='col-horizontal'>
+                    {/*horizontal4 */}
+                    <DropSection object={horizontal4} />
+                  </div>
                 </div>
               </div>
             </div>

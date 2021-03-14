@@ -1,11 +1,14 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
 import { v4 } from 'uuid';
+import { brickSetActive } from '../actions/brick';
 import './brick.css';
 
 export const BrickH = ({ brickColor }) => {
 
+    const dispatch = useDispatch();
 
-    const brick = [[, , ,], [, , ,]];
+    const brick = [['h','h','h','h'], ['h','h','h','h']];
 
     const createBrickH = () => {
         return brick.map(() => {
@@ -30,8 +33,16 @@ export const BrickH = ({ brickColor }) => {
         })
     }
 
+    const handleSelectBrick=()=>{
+        dispatch(brickSetActive(brick[0][0]));
+    }
+
     return (
-        <div className={`horizontal ${brickColor}Shadow`} >
+        <div 
+        className={`horizontal ${brickColor}Shadow`} 
+        onMouseOver={handleSelectBrick}
+        
+        >
             { createBrickH()}
         </div>
     )

@@ -1,10 +1,14 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
 import { v4 } from 'uuid';
+import { brickSetActive } from '../actions/brick';
 import './brick.css';
 
 export const BrickV = ({ brickColor }) => {
+    
+    const dispatch = useDispatch();
 
-    const brick = [[,], [,], [,], [,]];
+    const brick = [['v','v'], ['v','v'], ['v','v'], ['v','v']];
 
     const createBrickV = () => {
         return brick.map(() => {
@@ -19,8 +23,15 @@ export const BrickV = ({ brickColor }) => {
         })
     }
 
+    const handleSelectBrick=()=>{
+        dispatch(brickSetActive(brick[0][0]));
+    }
+
     return (
-        <div className={`vertical ${brickColor}Shadow`}>
+        <div 
+        className={`vertical ${brickColor}Shadow`}
+        onMouseOver={handleSelectBrick}
+        >
             { createBrickV()}
         </div>
     )
