@@ -2,12 +2,14 @@ import React from 'react';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 
 export const DropSection = ({ object }) => {
+
     return (
-        <div key={object.title}>
+        <div key={object.title} className='drop'>
             <Droppable droppableId={object.title}>
                 {(provided) => {
                     return (
-                        <div
+                        <div 
+                            className={`dropSection`}
                             ref={provided.innerRef}
                             {...provided.droppableProps}
 
@@ -22,7 +24,7 @@ export const DropSection = ({ object }) => {
                                                     ref={provided.innerRef}
                                                     {...provided.draggableProps}
                                                     {...provided.dragHandleProps}
-                                                >
+                                               >
                                                     { el.brick}
 
                                                 </div>

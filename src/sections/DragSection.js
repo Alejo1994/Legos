@@ -3,7 +3,7 @@ import { Draggable, Droppable } from 'react-beautiful-dnd';
 
 export const DragSection = ({bricks}) => {
     return (
-        <div key={"bricks"} className={"column"}>
+        <div key={"bricks"}>
           <h3>{bricks.title}</h3>
           <Droppable droppableId={"bricks"}>
             {(provided) => {

@@ -36,6 +36,15 @@
     
 }
 
+.orange {
+    width: 20px;
+    height: 20px;
+    background-color: orange;
+    align-items: center;
+    justify-content: center;
+    
+}
+
 /*Vertical*/
 .vertical{
     width: 42px;
@@ -78,6 +87,13 @@
     cursor: pointer;
 }
 
+.orangeShadow{
+    box-shadow:4px 5px 3px 1px orange;
+    -moz-box-shadow:4px 5px 3px 1px orange;
+    -webkit-box-shadow:4px 5px 3px 1px orange;
+    border: 1px black solid;
+    cursor: pointer;
+}
 
 .circleLego {
     width: 10px;
