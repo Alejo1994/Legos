@@ -4,17 +4,28 @@ import React, { useEffect, useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { v4 } from 'uuid';
 import Swal from 'sweetalert2';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { colors } from '../helpers/colors';
 import { BrickH } from '../Lego/BrickH';
 import { BrickV } from '../Lego/BrickV';
 import { DragSection } from '../sections/DragSection';
 import { DropSection } from '../sections/DropSection';
+import { saveScore } from '../actions/score';
+import { randomBoard } from '../helpers/boards';
+import { ExitSection } from '../sections/ExitSection';
 
-export const Board5 = () => {
+export const Board5 = ({ history }) => {
+
+    const dispatch = useDispatch();
+
+    let [count, setCount] = useState(0);
+    const [score, setScore] = useState(0);
 
     const { activeBrick } = useSelector(state => state.brick);
+
+    const { scores } = useSelector(state => state.score);
+
 
     const randomColor = () => {
         return colors[Math.floor(Math.random() * colors.length)];
@@ -22,7 +33,7 @@ export const Board5 = () => {
 
     const [state, setState] = useState({
         "bricks": {
-            title: "Legos",
+            title: "Legos 5",
             items: [
                 {
                     id: v4(),
@@ -95,16 +106,51 @@ export const Board5 = () => {
         horizontal3,
         horizontal4 } = state;
 
+
     useEffect(() => {
 
         if (bricks.items.length === 0) {
-            Swal.fire('Felicidades', 'Lo has logrado', 'success');
+            calculateScore();
+
+            Swal.fire({
+                title: 'Felicidades',
+                showDenyButton: false,
+                showCancelButton: false,
+                confirmButtonText: `OK`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    dispatch(saveScore('board5', score));
+
+                    let excludeBoard = [];
+
+                    if (scores.length > 0) {
+                        const excluded = [...scores];
+                        
+                         excluded.forEach(({ board }) => {
+                             excludeBoard = [{ 'name': board }, ...excludeBoard]
+                         })
+                    }
+
+                    const items = [{ 'name': 'board5' }, ...excludeBoard]
+
+                    history.push(`/${randomBoard(items)}`);
+                }
+            })
+
         }
 
-    }, [state, bricks.items.length])
+    }, [state, bricks.items.length, score]);
 
+    const calculateScore = async () => {
+        setScore((7 * 100) / count);
+    }
 
     const handleDragEnd = ({ destination, source }) => {
+
+        count = count + 1;
+        setCount(count);
+
         if (!destination) return;
 
         if (destination.index === source.index && destination.droppableId === source.droppableId) {
@@ -208,7 +254,7 @@ export const Board5 = () => {
                     </div>
                 </div>
             </DragDropContext>
-
+            <ExitSection />
         </div>
     )
 }

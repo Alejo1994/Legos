@@ -2,13 +2,13 @@ import React from 'react'
 import {Provider}from 'react-redux'
 
 import { store } from './store/store'
-import { LegosIndex } from './LegosIndex'
+import { AppRouter } from './routers/AppRouter'
 
 export const LegosApp = () => {
     return (
         <div>
             <Provider store={store}>
-                <LegosIndex />
+                <AppRouter />
             </Provider>
         </div>
     )
