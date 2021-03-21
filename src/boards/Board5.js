@@ -6,7 +6,7 @@ import { v4 } from 'uuid';
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { colors } from '../helpers/colors';
+import { randomColor } from '../helpers/colors';
 import { BrickH } from '../Lego/BrickH';
 import { BrickV } from '../Lego/BrickV';
 import { DragSection } from '../sections/DragSection';
@@ -26,14 +26,9 @@ export const Board5 = ({ history }) => {
 
     const { scores } = useSelector(state => state.score);
 
-
-    const randomColor = () => {
-        return colors[Math.floor(Math.random() * colors.length)];
-    }
-
     const [state, setState] = useState({
         "bricks": {
-            title: "Legos 5",
+            title: "Tangrama",
             items: [
                 {
                     id: v4(),
@@ -117,24 +112,13 @@ export const Board5 = ({ history }) => {
                 showDenyButton: false,
                 showCancelButton: false,
                 confirmButtonText: `OK`,
+                icon: 'success',
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                     dispatch(saveScore('board5', score));
 
-                    let excludeBoard = [];
-
-                    if (scores.length > 0) {
-                        const excluded = [...scores];
-                        
-                         excluded.forEach(({ board }) => {
-                             excludeBoard = [{ 'name': board }, ...excludeBoard]
-                         })
-                    }
-
-                    const items = [{ 'name': 'board5' }, ...excludeBoard]
-
-                    history.push(`/${randomBoard(items)}`);
+                    history.push(`/${randomBoard(scores, 'board5',score)}`);
                 }
             })
 

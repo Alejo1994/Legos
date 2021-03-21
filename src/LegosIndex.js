@@ -1,6 +1,6 @@
 import React from 'react'
 import { randomBoard } from './helpers/boards';
-import { colors } from './helpers/colors';
+import { randomColor } from './helpers/colors';
 import { BrickH } from './Lego/BrickH';
 import { BrickV } from './Lego/BrickV';
 
@@ -8,10 +8,6 @@ export const LegosIndex = ({ history }) => {
 
   const handleStart = () => {
     history.push(`/${randomBoard()}`);
-  }
-
-  const randomColor = () => {
-    return colors[Math.floor(Math.random() * colors.length)];
   }
 
   return (

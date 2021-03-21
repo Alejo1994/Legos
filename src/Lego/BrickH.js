@@ -11,8 +11,8 @@ export const BrickH = ({ brickColor }) => {
     const brick = [['h','h','h','h'], ['h','h','h','h']];
 
     const createBrickH = () => {
-        return brick.map(() => {
-            return <div className='pair'>
+        return brick.map((x,i) => {
+            return <div key={v4()} className='pair'>
 
                 <div key={v4()} className={`circle ${brickColor}`}>
                     <div key={v4()} className='circleLego'>Lego</div>

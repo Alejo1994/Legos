@@ -15,3 +15,7 @@ export const colors = [
         "brickColor": "orange"
     },
 ];
+
+export const randomColor = () => {
+    return colors[Math.floor(Math.random() * colors.length)];
+}
